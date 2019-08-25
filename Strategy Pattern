@@ -48,6 +48,8 @@ It is important to note, we are taking the design principle objective to PROGRAM
 An interface is used to represent each behaviour. In this case, FlyBehaviour and QuackBehaviour are interfaces and each 
 class that implements these interfaces will adapt the required behaviours.
 
+-------------------------------------------------------------------------------------------------------------------------
+Encapsulated Fly Behaviour
                                 -----------------------------
                                 |      << Interface >>       |
                                 |        FlyBehaviour        |
@@ -66,7 +68,9 @@ class that implements these interfaces will adapt the required behaviours.
        | }                            |                    | }                            |
        --------------------------------                    --------------------------------
           
-          
+  
+  -----------------------------------------------------------------------------------------------------------------------
+  Encapsulated Quack Behaviour
                                   -----------------------------
                                   |      << Interface >>       |
                                   |       QuackBehaviour       |
@@ -84,4 +88,5 @@ class that implements these interfaces will adapt the required behaviours.
  |   //implements duck quacking |   |   //ruber duck squeak    |    |    //do nothing - can't quack   |
  | }                            |   | }                        |    | }                               |
  --------------------------------   ----------------------------    -----------------------------------
-          
+ 
+ --------------------------------------------------------------------------------------------------------------------------
