@@ -1,2 +1,87 @@
 In Strategy pattern, a class behavior or its algorithm can be changed at run time. 
 This type of design pattern comes under behavior pattern
+
+The book speaks of a simple SimUDuckApp, a duck pond simulation game that needs to adjust as it expands to different arenas. 
+
+The initial designers of the app, used standard OO techniques and created one Duck superclass from which all other duck types 
+inherit. 
+
+
+                                -----------------------------
+                                |            DUCK            |
+                                -----------------------------
+                                |quack()                     |
+                                |swim()                      |
+                                |display()                   |
+                                |//OTHER duck-like methods.. |
+                                -----------------------------
+                                   /                     \
+                                  /                       \
+                                 /                         \
+                                /                           \
+          -----------------------------                    --------------------------------
+          |     Mallard Duck          |                    |         RedheadDuck          |
+          ----------------------------                     --------------------------------
+          | display()                 |                    | display()                    |
+          | {                         |                    | {                            |
+          |    //looks like mallard   |                    |    //looks like a redhead    |
+          | }                         |                    | }                            |
+          -----------------------------                    --------------------------------
+          
+    
+With increasing pressure from the competitors, the executives have desided the Ducks should now fly. 
+Now this may look easy by adding fly() method to the DUCK superclass. Sadly, this may affect other ducks such as ones 
+that are inanimate... imagine rubber ducks flying! 
+ 
+Using inheritance, has it perks. However maintainace sometimes can be a heavy cost. Let's say we decided to keep fly() in 
+the duck superclass, the side effect would be every other sub class would need a condition applied when the ducks should 
+not fly. A heavy restructure is needed! 
+ 
+The best way to address this issue is to take what varies and encapsulate it so it won't affect the rest of the code. 
+The results will be fewer uninteded consequences from code changes and more flexibility in your systems. 
+
+
+Duck Behaviours: Fly Behaviour and Quacking Behaviour 
+Duck Class: Pulls out what varies from the Duck Behaviours. 
+
+It is important to note, we are taking the design principle objective to PROGRAM TO AN INTERFACE, NOT AN IMPLEMENTATION.
+An interface is used to represent each behaviour. In this case, FlyBehaviour and QuackBehaviour are interfaces and each 
+class that implements these interfaces will adapt the required behaviours.
+
+                                -----------------------------
+                                |      << Interface >>       |
+                                |        FlyBehaviour        |
+                                -----------------------------
+                                | fly()                      |
+                                -----------------------------
+                                  /                       \
+                                 /                         \
+                                /                           \
+       --------------------------------                    --------------------------------
+       |      FlyWithWings            |                    |          FlyNoWay            |
+       --------------------------------                     --------------------------------
+       | fly()                        |                    | fly()                        |
+       | {                            |                    | {                            |
+       |   //implements duck flying   |                    |    //do nothing can't fly    |
+       | }                            |                    | }                            |
+       --------------------------------                    --------------------------------
+          
+          
+                                  -----------------------------
+                                  |      << Interface >>       |
+                                  |       QuackBehaviour       |
+                                  -----------------------------
+                                  | quack()                    |
+                                  -----------------------------
+                                  /            |                \
+                                 /             |                 \
+                                /              |                  \
+ -------------------------------    ----------------------------    -----------------------------------
+ |      Quack                  |    |     Squeak               |    |          MuteQuack              |
+ -------------------------------    ----------------------------    -----------------------------------
+ | quack()                      |   | quack()                  |    | quack()                         |
+ | {                            |   | {                        |    | {                               |
+ |   //implements duck quacking |   |   //ruber duck squeak    |    |    //do nothing - can't quack   |
+ | }                            |   | }                        |    | }                               |
+ --------------------------------   ----------------------------    -----------------------------------
+          
